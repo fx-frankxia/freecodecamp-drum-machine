@@ -1,45 +1,45 @@
 export default [{
     id:0,
-    key:'q',
+    key:'Q',
     sound:'BDRUM'
 },
 {
     id:1,
-    key:'w',
+    key:'W',
     sound:'CRUSH1'
 },
 {
     id:2,
-    key:'e',
+    key:'E',
     sound:'HHCLOSE1'
 },
 {
     id:3,
-    key:'a',
+    key:'A',
     sound:'HHOPEN2'
 },
 {
     id:4,
-    key:'s',
+    key:'S',
     sound:'HICONGA'
 },
 {
     id:5,
-    key:'d',
+    key:'D',
     sound:'LOWCONGA'
 },
 {
     id:6,
-    key:'z',
+    key:'Z',
     sound:'SNARE1'
 },
 {
     id:7,
-    key:'x',
+    key:'X',
     sound:'TOM1'
 },
 {
     id:8,
-    key:'c',
+    key:'C',
     sound:'TOM2'
 }]

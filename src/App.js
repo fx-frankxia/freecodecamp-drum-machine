@@ -19,31 +19,21 @@ function App() {
   const [keyDisplay, setKeyDisplay] = useState('');
 
   useEffect(() => {
-    const drumPads = document.querySelectorAll('.drum-pad');
-    drumPads[0].addEventListener('keydown', (ev) => {
-      console.log(ev.key)
-    })
-    console.log(drumPads[0])
-    }
-  )
-    
-  
-    //   drumpad.addEventListener('keydown', (ev) => {
-    //     let foundObject = data.find(object => object.key === ev.key)
-    //     if(foundObject) {
-    //       console.log(foundObject)
-    //       handleKeyDown(foundObject)
-    //     }
-    // })
-    // })
+    document.addEventListener('keydown', handleKeyDown)
+  })
 
   const handleClick = (ev) => {
     ev.target.firstChild.play();
     setKeyDisplay(ev.target.innerText)
   }
 
-  const handleKeyDown = (keyObject) => {
-    const upKey = keyObject.key.toUpperCase()
+  const handleKeyDown = (ev) => {
+    data.forEach(sound => {
+      if(ev.key.toUpperCase() === sound.key) {
+        document.getElementById(sound.key).play()
+        setKeyDisplay(ev.key.toUpperCase())
+      }
+    })
 
   }
 
@@ -57,8 +47,8 @@ function App() {
           {soundSrcArray.map((eachSrc, index) => {
             return (
               <button key={index} className="drum-pad" id={index} onClick={handleClick}>               
-                <audio src={eachSrc} className="clip" id={data[index].key.toUpperCase()} ></audio>
-                {data[index].key.toUpperCase()}                
+                <audio src={eachSrc} className="clip" id={data[index].key} ></audio>
+                {data[index].key}                
               </button>
             )
           })}
