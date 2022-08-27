@@ -1,65 +1,67 @@
 import './App.css';
-import {Howl, Howler} from 'howler';
 import { useEffect, useState } from 'react';
 import data from './data.js'
-import sound1 from "./audio/80s-Bdrum1.wav"
-import sound2 from "./audio/80s-CRASH1.wav"
-import sound3 from "./audio/80s-HHCLOSE1.wav"
-import sound4 from "./audio/80s-HHOPEN2.wav"
-import sound5 from "./audio/80s-HICONGA.wav"
-import sound6 from "./audio/80s-LOWCONGA.wav"
-import sound7 from "./audio/80s-SNARE1.wav"
-import sound8 from "./audio/80s-TOM1.wav"
-import sound9 from "./audio/80s-TOM2.wav"
+import sound1 from "./audio/mp3/80s-Bdrum1.mp3"
+import sound2 from "./audio/mp3/80s-CRASH1.mp3"
+import sound3 from "./audio/mp3/80s-HHCLOSE1.mp3"
+import sound4 from "./audio/mp3/80s-HHOPEN2.mp3"
+import sound5 from "./audio/mp3/80s-HICONGA.mp3"
+import sound6 from "./audio/mp3/80s-LOWCONGA.mp3"
+import sound7 from "./audio/mp3/80s-SNARE1.mp3"
+import sound8 from "./audio/mp3/80s-TOM1.mp3"
+import sound9 from "./audio/mp3/80s-TOM2.mp3"
 
-const soundArray = [sound1,sound2,sound3,sound4,sound5,sound6,sound7,sound8,sound9];
-const soundObjectArray = soundArray.map((soundClip) => {
-const sound = new Howl({
-    src: [soundClip],
-    onload: () => console.log('sound loaded'),
-    onloaderror: (e, msg) => console.log(e,msg)
-  })
-  return sound
-})
+const soundSrcArray = [sound1,sound2,sound3,sound4,sound5,sound6,sound7,sound8,sound9];
+
 
 function App() {
 
   const [keyDisplay, setKeyDisplay] = useState('');
 
-  const handleClick = (e) => {
-    soundObjectArray[e.target.id].play()
-    setKeyDisplay(data[e.target.id].sound)
-  }
-
-  const findSound = (arry, key) => {
-    const matchObject = arry.find(soundObject => soundObject.key === key);
-    return matchObject
-  }
-
   useEffect(() => {
-    document.addEventListener('keydown', (ev) => {
-      let soundObject = findSound(data, ev.key)
-      soundObjectArray[soundObject.id].play()
-      setKeyDisplay(soundObject.sound);
+    const drumPads = document.querySelectorAll('.drum-pad');
+    drumPads[0].addEventListener('keydown', (ev) => {
+      console.log(ev.key)
     })
-  },[])
+    console.log(drumPads[0])
+    }
+  )
+    
+  
+    //   drumpad.addEventListener('keydown', (ev) => {
+    //     let foundObject = data.find(object => object.key === ev.key)
+    //     if(foundObject) {
+    //       console.log(foundObject)
+    //       handleKeyDown(foundObject)
+    //     }
+    // })
+    // })
+
+  const handleClick = (ev) => {
+    ev.target.firstChild.play();
+    setKeyDisplay(ev.target.innerText)
+  }
+
+  const handleKeyDown = (keyObject) => {
+    const upKey = keyObject.key.toUpperCase()
+
+  }
 
   return (
     <div className="App">
       <div id="drum-machine">
-      <div id="container-func">
-          <div id="display">{keyDisplay}</div>
+        <div id="container-func">
+            <div id="display">{keyDisplay}</div>
         </div>
         <div id="container-pads">
-          <button className="drum-pad" id="0" onClick={handleClick}>Q</button>
-          <button className="drum-pad" id="1" onClick={handleClick}>W</button>
-          <button className="drum-pad" id="2" onClick={handleClick}>E</button>
-          <button className="drum-pad" id="3" onClick={handleClick}>A</button>
-          <button className="drum-pad" id="4" onClick={handleClick}>S</button>
-          <button className="drum-pad" id="5" onClick={handleClick}>D</button>
-          <button className="drum-pad" id="6" onClick={handleClick}>Z</button>
-          <button className="drum-pad" id="7" onClick={handleClick}>X</button>
-          <button className="drum-pad" id="8" onClick={handleClick}>C</button>
+          {soundSrcArray.map((eachSrc, index) => {
+            return (
+              <button key={index} className="drum-pad" id={index} onClick={handleClick}>               
+                <audio src={eachSrc} className="clip" id={data[index].key.toUpperCase()} ></audio>
+                {data[index].key.toUpperCase()}                
+              </button>
+            )
+          })}
         </div>  
       </div>
     </div>
