@@ -1,5 +1,7 @@
 import './App.css';
 import {Howl, Howler} from 'howler';
+import { useEffect, useState } from 'react';
+import data from './data.js'
 import sound1 from "./audio/80s-Bdrum1.wav"
 import sound2 from "./audio/80s-CRASH1.wav"
 import sound3 from "./audio/80s-HHCLOSE1.wav"
@@ -9,9 +11,8 @@ import sound6 from "./audio/80s-LOWCONGA.wav"
 import sound7 from "./audio/80s-SNARE1.wav"
 import sound8 from "./audio/80s-TOM1.wav"
 import sound9 from "./audio/80s-TOM2.wav"
-import { useEffect, useState } from 'react';
 
-const soundArray = [sound1, sound2,sound3,sound4,sound5,sound6,sound7,sound8,sound9];
+const soundArray = [sound1,sound2,sound3,sound4,sound5,sound6,sound7,sound8,sound9];
 const soundObjectArray = soundArray.map((soundClip) => {
 const sound = new Howl({
     src: [soundClip],
@@ -21,22 +22,25 @@ const sound = new Howl({
   return sound
 })
 
-const keyObject = {q:'0', w:'1', e:'2', a:'3', s:'4', d:'5', z:'6', x:'7', c:'8'}
-const whichSound = ['BDRUM', 'CRUSH1', 'HHCLOSE1', 'HHOPEN2','HICONGA','LOWCONGA','SNARE1','TOM1','TOM2']
-
 function App() {
+
   const [keyDisplay, setKeyDisplay] = useState('');
 
   const handleClick = (e) => {
     soundObjectArray[e.target.id].play()
-    setKeyDisplay(whichSound[e.target.id]);
+    setKeyDisplay(data[e.target.id].sound)
+  }
+
+  const findSound = (arry, key) => {
+    const matchObject = arry.find(soundObject => soundObject.key === key);
+    return matchObject
   }
 
   useEffect(() => {
     document.addEventListener('keydown', (ev) => {
-      let keyIndex = keyObject[ev.key];
-      soundObjectArray[keyIndex].play()
-      setKeyDisplay(whichSound[keyIndex]);
+      let soundObject = findSound(data, ev.key)
+      soundObjectArray[soundObject.id].play()
+      setKeyDisplay(soundObject.sound);
     })
   },[])
 

@@ -1,0 +1,45 @@
+export default [{
+    id:0,
+    key:'q',
+    sound:'BDRUM'
+},
+{
+    id:1,
+    key:'w',
+    sound:'CRUSH1'
+},
+{
+    id:2,
+    key:'e',
+    sound:'HHCLOSE1'
+},
+{
+    id:3,
+    key:'a',
+    sound:'HHOPEN2'
+},
+{
+    id:4,
+    key:'s',
+    sound:'HICONGA'
+},
+{
+    id:5,
+    key:'d',
+    sound:'LOWCONGA'
+},
+{
+    id:6,
+    key:'z',
+    sound:'SNARE1'
+},
+{
+    id:7,
+    key:'x',
+    sound:'TOM1'
+},
+{
+    id:8,
+    key:'c',
+    sound:'TOM2'
+}]
