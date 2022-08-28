@@ -22,7 +22,6 @@ function App() {
         setKeyDisplay(item.name)
       }
     })
-
   }
 
   return (
@@ -30,13 +29,17 @@ function App() {
       <div id="drum-machine">
         <div id="container-func">
             <div id="display">{keyDisplay}</div>
+            <div>
+              <h2 id='h2'>80'S CLASSIC SOUND</h2>
+              <h1 id='h1'>DRUM MACHINE</h1>
+            </div>
         </div>
         <div id="container-pads">
           {data.map((item, index) => {
             return (
               <button key={index} className="drum-pad" id={index} onClick={handleClick} name={item.name}>               
                 <audio src={item.soundSrc} className="clip" id={item.key} ></audio>
-                {data[index].key}                
+                {item.key}                
               </button>
             )
           })}

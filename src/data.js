@@ -12,7 +12,7 @@ export default [{
     id:0,
     key:'Q',
     name:'BDRUM',
-    soundSrc:sound1   
+    soundSrc:sound1
 },
 {
     id:1,
